@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Power BI Embed com Rotação de Páginas</title>
+    <meta http-equiv="refresh" content="300"> <!-- Atualiza a página a cada 5 minutos -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="pbiFrame"
+        src="https://app.powerbi.com/reportEmbed?reportId=e0ab1456-9c53-4931-adfa-cd009232c08d&groupId=02996a96-350d-44aa-a911-1a6f922fab9e&autoAuth=true&ctid=ab76006b-b65f-4a39-82ea-912c4580a063&pageName=038240e264007a5e7c09">
+    </iframe>
+
+    <script>
+        const pages = [
+            "038240e264007a5e7c09",
+            "186f907bbcef8d97bdc0",
+            "e4591f5d2de80eab73d8",
+            "7611719322b6586edd2a"
+        ];
+        let index = 0;
+
+        setInterval(() => {
+            index = (index + 1) % pages.length;
+            const frame = document.getElementById("pbiFrame");
+            const baseUrl = "https://app.powerbi.com/reportEmbed?reportId=e0ab1456-9c53-4931-adfa-cd009232c08d&groupId=02996a96-350d-44aa-a911-1a6f922fab9e&autoAuth=true&ctid=ab76006b-b65f-4a39-82ea-912c4580a063&pageName=";
+            frame.src = baseUrl + pages[index];
+        }, 30000); // troca de página a cada 30 segundos
+    </script>
+</body>
+</html>
